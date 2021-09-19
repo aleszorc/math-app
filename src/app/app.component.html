@@ -30,17 +30,21 @@
     background-size: cover;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
   }
 
   .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background-color: beige;
     padding: 20px;
     border-radius: 10px;
+  }
+
+  .calculation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .header {
@@ -63,16 +67,52 @@
     font-size: 60px;
     font-weight: 100;
   }
+
+  .feedback {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  .feedback-text {
+    color: white;
+  }
 </style>
 
 <div class="background">
   <div class="container">
-    <h1 class="header">{{ first_num }} + {{ second_num }} =</h1>
-    <input
-      [(ngModel)]="result"
-      class="result-input"
-      (keyup.enter)="checkResult()"
-    />
+    <div
+      *ngIf="isCorrect"
+      class="feedback"
+      [ngStyle]="{
+        visibility: isCorrect ? 'visible' : 'hidden',
+        'background-color': 'green'
+      }"
+      (click)="hideFeedback()"
+    >
+      <h2 class="feedback-text">Pravilno! 🎉</h2>
+    </div>
+    <div
+      *ngIf="isWrong"
+      class="feedback"
+      [ngStyle]="{
+        visibility: isWrong ? 'visible' : 'hidden',
+        'background-color': 'red'
+      }"
+      (click)="hideFeedback()"
+    >
+      <h2 class="feedback-text">Napačno!</h2>
+    </div>
+    <div class="calculation">
+      <h1 class="header">{{ first_num }} + {{ second_num }} =</h1>
+      <input
+        [(ngModel)]="result"
+        class="result-input"
+        (keyup.enter)="checkResult()"
+      />
+    </div>
   </div>
 </div>
 
