@@ -9,9 +9,13 @@ import getRandomNum from 'utils/getRandomNum';
 export class AppComponent {
   constructor() {}
 
+  title = 'math-app';
+
   first_num: number = getRandomNum(50);
   second_num: number = getRandomNum(50);
   result: string = '';
+
+  points = 0;
 
   isCorrect = false;
   isWrong = false;
@@ -30,9 +34,11 @@ export class AppComponent {
     if (parseInt(this.result) === this.first_num + this.second_num) {
       this.isWrong = false;
       this.isCorrect = true;
+      this.points++;
     } else {
       this.isCorrect = false;
       this.isWrong = true;
+      this.points--;
     }
     this.result = '';
     this.initateNumbers();

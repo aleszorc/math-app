@@ -25,7 +25,7 @@
   }
 
   .background {
-    background: linear-gradient(rgba(49, 36, 36, 0.6), rgba(0, 0, 0, 0.6)),
+    background: linear-gradient(rgba(49, 36, 36, 0.6), rgba(0, 0, 0, 0.3)),
       url("../assets/images/bg.jpg");
     background-size: cover;
     height: 100vh;
@@ -36,9 +36,9 @@
   }
 
   .container {
-    background-color: beige;
+    background-color: #e8a87c;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 5px;
   }
 
   .calculation {
@@ -58,8 +58,10 @@
     width: 100px;
     height: 100px;
     text-align: center;
-    background-color: beige;
+    background-color: #e8a87c;
     margin-left: 20px;
+    border-color: black;
+    font-weight: 100;
   }
 
   .result-input:focus {
@@ -69,42 +71,48 @@
   }
 
   .feedback {
-    margin-bottom: 20px;
+    position: absolute;
+    top: 200px;
+    z-index: 10;
     padding: 10px;
-    border: 1px solid black;
     border-radius: 5px;
     text-align: center;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   }
 
   .feedback-text {
-    color: white;
+    color: "#fff";
+    font-size: 50px;
+    font-weight: 100;
+  }
+
+  .points {
+    position: absolute;
+    top: 50px;
+    background-color: #c38d9e;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  .points-header {
+    font-size: 30px;
+    font-weight: 200;
+    text-align: center;
+  }
+
+  .points-text {
+    padding-top: 10px;
+    font-size: 30px;
+    font-weight: 800;
+    text-align: center;
   }
 </style>
 
 <div class="background">
+  <div class="points">
+    <h3 class="points-header">Točke</h3>
+    <h3 class="points-text">{{ points }}</h3>
+  </div>
   <div class="container">
-    <div
-      *ngIf="isCorrect"
-      class="feedback"
-      [ngStyle]="{
-        visibility: isCorrect ? 'visible' : 'hidden',
-        'background-color': 'green'
-      }"
-      (click)="hideFeedback()"
-    >
-      <h2 class="feedback-text">Pravilno! 🎉</h2>
-    </div>
-    <div
-      *ngIf="isWrong"
-      class="feedback"
-      [ngStyle]="{
-        visibility: isWrong ? 'visible' : 'hidden',
-        'background-color': 'red'
-      }"
-      (click)="hideFeedback()"
-    >
-      <h2 class="feedback-text">Napačno!</h2>
-    </div>
     <div class="calculation">
       <h1 class="header">{{ first_num }} + {{ second_num }} =</h1>
       <input
@@ -113,6 +121,28 @@
         (keyup.enter)="checkResult()"
       />
     </div>
+  </div>
+  <div
+    *ngIf="isCorrect"
+    class="feedback"
+    [ngStyle]="{
+      visibility: isCorrect ? 'visible' : 'hidden',
+      'background-color': '#41B3A3'
+    }"
+    (click)="hideFeedback()"
+  >
+    <h2 class="feedback-text">Pravilno! 🎉</h2>
+  </div>
+  <div
+    *ngIf="isWrong"
+    class="feedback"
+    [ngStyle]="{
+      visibility: isWrong ? 'visible' : 'hidden',
+      'background-color': '#E27D60'
+    }"
+    (click)="hideFeedback()"
+  >
+    <h2 class="feedback-text">Napačno! 😭</h2>
   </div>
 </div>
 
